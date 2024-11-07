@@ -8,75 +8,68 @@ const double PI = 3.14159;
 // Classe abstrata Forma
 class Forma {
 public:
-    virtual double calcularArea() const = 0;      
-    virtual double calcularPerimetro() const = 0;  
-    virtual void exibirTipo() const = 0;           
-    virtual ~Forma() {}                            
+    virtual double calcularArea() = 0;      
+    virtual double calcularPerimetro() = 0;  
+    virtual void exibirTipo() = 0;                                      
 };
 
 // Classe concreta Circulo
 class Circulo : public Forma {
-private:
-    double raio;
-
 public:
-    Circulo(double r) : raio(r) {}
+    double raio;
+    Circulo(float r) : raio(r) {}
 
-    double calcularArea() const override {
+    double calcularArea() override {
         return PI * raio * raio;
     }
 
-    double calcularPerimetro() const override {
+    double calcularPerimetro() override {
         return 2 * PI * raio;
     }
 
-    void exibirTipo() const override {
+    void exibirTipo() override {
         cout << "Círculo" << endl;
     }
 };
 
 // Classe concreta Quadrado
 class Quadrado : public Forma {
-private:
-    double lado;
-
 public:
+    double lado;
     Quadrado(double l) : lado(l) {}
 
-    double calcularArea() const override {
+    double calcularArea() override {
         return lado * lado;
     }
 
-    double calcularPerimetro() const override {
+    double calcularPerimetro() override {
         return 4 * lado;
     }
 
-    void exibirTipo() const override {
+    void exibirTipo() override {
         cout << "Quadrado" << endl;
     }
 };
 
 // Classe concreta Triangulo 
 class Triangulo : public Forma {
-private:
+public:
     double base;
     double altura;
     double lado1, lado2, lado3; 
-
-public:
     Triangulo(double b, double h, double l1, double l2, double l3)
         : base(b), altura(h), lado1(l1), lado2(l2), lado3(l3) {}
 
-    double calcularArea() const override {
+    double calcularArea() override {
         return (base * altura) / 2;
     }
 
-    double calcularPerimetro() const override {
+    double calcularPerimetro() override {
         return lado1 + lado2 + lado3;
     }
 
-    void exibirTipo() const override {
-        cout << "Triângulo" << std::endl;
+    void exibirTipo() override {
+        cout << "Triângulo" << endl;
     }
 };
 
@@ -90,12 +83,10 @@ int main() {
     for (int i = 0; i < 3; ++i) {
         if (formas[i]) { 
             formas[i]->exibirTipo();
-            cout << "Área: " << fixed << setprecision(2) << formas[i]->calcularArea() << endl;
-            cout << "Perímetro: "<< fixed << setprecision(2) << formas[i]->calcularPerimetro() << endl;
+            cout << "Área: " << fixed << setprecision(1) << formas[i]->calcularArea() << endl;
+            cout << "Perímetro: " << fixed << setprecision(1) << formas[i]->calcularPerimetro() << endl;
             cout << endl;
-            delete formas[i];
         }
     }
-
     return 0;
 }
